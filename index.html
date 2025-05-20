@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🍳 Recipe Collection</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍝</text></svg>"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="site-title">Delicious Recipes</h1>
+      <p class="site-description">
+        Discover a collection of our favorite recipes that are easy to follow
+        and delightful to taste.
+      </p>
+    </header>
+
+    <div class="recipe-container">
+      <div class="recipe-card">
+        <div class="image-container">
+          <img
+            src="https://imgs.search.brave.com/fRdKH80YB9vGD57JTNE5jjZ2lXo-ewp3DjqLou_RoEY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tYXJr/ZXRwbGFjZS5jYW52/YS5jb20vSk94MVUv/TUFGaU5ZSk94MVUv/MS90bC9jYW52YS1j/aG9jb2xhdGUtY2Fr/ZS1NQUZpTllKT3gx/VS5qcGc"
+            alt="Chocolate Cake"
+            class="recipe-image"
+          />
+          <span class="recipe-type">Dessert</span>
+        </div>
+
+        <div class="recipe-content">
+          <h1>🍫 Chocolate Cake</h1>
+
+          <div class="info">
+            <p>
+              <strong>Prep Time</strong>
+              45 mins
+            </p>
+            <p>
+              <strong>Servings</strong>
+              8
+            </p>
+            <p>
+              <strong>Difficulty</strong>
+              Medium
+            </p>
+          </div>
+
+          <div class="button-group">
+            <button class="toggle-ingredients" id="toggle-ingredients">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+                />
+              </svg>
+              Ingredients
+            </button>
+            <button class="toggle-steps" id="toggle-steps">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              Steps
+            </button>
+            <button class="start-cooking" id="start-cooking">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+              Start Cooking
+            </button>
+            <button class="next-step hidden" id="next-step" disabled>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+              Next Step
+            </button>
+          </div>
+
+          <ul class="ingredients hidden" id="ingredients-list">
+            <li>1½ cups flour</li>
+            <li>1 cup sugar</li>
+            <li>½ cup cocoa powder</li>
+            <li>1 tsp baking soda</li>
+            <li>1 cup milk</li>
+            <li>2 eggs</li>
+          </ul>
+
+          <ol class="steps hidden" id="steps-list">
+            <li>Preheat the oven to 350°F (175°C).</li>
+            <li>Mix dry ingredients in a bowl.</li>
+            <li>Whisk wet ingredients separately.</li>
+            <li>Combine wet and dry ingredients.</li>
+            <li>Pour batter into a greased pan.</li>
+            <li>Bake for 30-35 minutes. Let cool and serve.</li>
+          </ol>
+
+          <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+
+          <div id="timer" class="timer hidden">⏱ 00:00</div>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <div class="image-container">
+          <img
+            src="https://imgs.search.brave.com/e-MRbO5LY6GfmuIiy2rDr3E_gHQ6Oj9T-o-4u1zskoI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzEwLzYxLzg2LzE3/LzM2MF9GXzEwNjE4/NjE3NDZfd0F5MTkz/SEs0ZUJQUjFGeHcz/UXpib1huQU53cGw4/a3MuanBn"
+            alt="Pasta Alfredo"
+            class="recipe-image"
+          />
+          <span class="recipe-type">Main Dish</span>
+        </div>
+
+        <div class="recipe-content">
+          <h1>🍝 Pasta Alfredo</h1>
+
+          <div class="info">
+            <p>
+              <strong>Prep Time</strong>
+              30 mins
+            </p>
+            <p>
+              <strong>Servings</strong>
+              4
+            </p>
+            <p>
+              <strong>Difficulty</strong>
+              Easy
+            </p>
+          </div>
+
+          <div class="button-group">
+            <button class="toggle-ingredients">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+                />
+              </svg>
+              Ingredients
+            </button>
+            <button class="toggle-steps">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              Steps
+            </button>
+            <button class="start-cooking">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+              Start Cooking
+            </button>
+            <button class="next-step hidden" disabled>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+              Next Step
+            </button>
+          </div>
+
+          <ul class="ingredients hidden">
+            <li>200g fettuccine pasta</li>
+            <li>1 cup heavy cream</li>
+            <li>2 tbsp butter</li>
+            <li>1 tsp garlic (minced)</li>
+            <li>1 cup grated Parmesan cheese</li>
+            <li>Salt & pepper to taste</li>
+          </ul>
+
+          <ol class="steps hidden">
+            <li>Cook pasta until al dente.</li>
+            <li>Melt butter, add garlic and sauté.</li>
+            <li>Add cream and simmer for 5 mins.</li>
+            <li>Stir in Parmesan and cooked pasta.</li>
+            <li>Season and serve hot.</li>
+          </ol>
+
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+          </div>
+
+          <div class="timer hidden">⏱ 00:00</div>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <div class="image-container">
+          <img
+            src="https://imgs.search.brave.com/rlFLkg3jlN_3yWGu0584xIRVjRGZ7JzrFP4cdOBX-KA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9udXRy/aXRpb25yZWZpbmVk/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAyMy8wOC9nYXJk/ZW4tc2FsYWQuanBn"
+            alt="Garden Salad"
+            class="recipe-image"
+          />
+          <span class="recipe-type">Salad</span>
+        </div>
+
+        <div class="recipe-content">
+          <h1>🥗 Garden Salad</h1>
+
+          <div class="info">
+            <p>
+              <strong>Prep Time</strong>
+              15 mins
+            </p>
+            <p>
+              <strong>Servings</strong>
+              4
+            </p>
+            <p>
+              <strong>Difficulty</strong>
+              Easy
+            </p>
+          </div>
+
+          <div class="button-group">
+            <button class="toggle-ingredients">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+                />
+              </svg>
+              Ingredients
+            </button>
+            <button class="toggle-steps">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              Steps
+            </button>
+            <button class="start-cooking">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+              Start Cooking
+            </button>
+            <button class="next-step hidden" disabled>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+              Next Step
+            </button>
+          </div>
+
+          <ul class="ingredients hidden">
+            <li>2 cups mixed greens</li>
+            <li>1 cucumber, sliced</li>
+            <li>1 tomato, diced</li>
+            <li>1/2 red onion, thinly sliced</li>
+            <li>1/4 cup olives</li>
+            <li>2 tbsp olive oil</li>
+            <li>1 tbsp balsamic vinegar</li>
+          </ul>
+
+          <ol class="steps hidden">
+            <li>Wash and dry all vegetables.</li>
+            <li>Combine vegetables in a large bowl.</li>
+            <li>Mix olive oil and balsamic vinegar.</li>
+            <li>Drizzle dressing over salad.</li>
+            <li>Toss gently and serve immediately.</li>
+          </ol>
+
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+          </div>
+
+          <div class="timer hidden">⏱ 00:00</div>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <div class="image-container">
+          <img
+            src="https://imgs.search.brave.com/3Rr4i2zbIH2vwZb2YxSXRQuan-7i_0kWLgzXF49MTTE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzEwLzUwLzA5LzAx/LzM2MF9GXzEwNTAw/OTAxNTRfbGl4N3pk/T1JsV010SlBYVG9z/YzRjc1owZFc0SDNi/RXIuanBn"
+            alt="Butter Chicken"
+            class="recipe-image"
+          />
+          <span class="recipe-type">Main Dish</span>
+        </div>
+
+        <div class="recipe-content">
+          <h1>🍗 Butter Chicken</h1>
+
+          <div class="info">
+            <p>
+              <strong>Prep Time</strong>
+              40 mins
+            </p>
+            <p>
+              <strong>Servings</strong>
+              4
+            </p>
+            <p>
+              <strong>Difficulty</strong>
+              Medium
+            </p>
+          </div>
+
+          <div class="button-group">
+            <button class="toggle-ingredients">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+                />
+              </svg>
+              Ingredients
+            </button>
+            <button class="toggle-steps">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              Steps
+            </button>
+            <button class="start-cooking">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+              Start Cooking
+            </button>
+            <button class="next-step hidden" disabled>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+              Next Step
+            </button>
+          </div>
+
+          <ul class="ingredients hidden">
+            <li>500g boneless chicken</li>
+            <li>1 cup yogurt</li>
+            <li>1 tbsp ginger-garlic paste</li>
+            <li>1 tsp garam masala</li>
+            <li>2 tbsp butter</li>
+            <li>1 cup tomato puree</li>
+            <li>½ cup cream</li>
+          </ul>
+
+          <ol class="steps hidden">
+            <li>
+              Marinate chicken in yogurt, spices, and garlic paste for 1 hour.
+            </li>
+            <li>Cook chicken until golden.</li>
+            <li>In a pan, melt butter and add tomato puree.</li>
+            <li>Add cream and simmer.</li>
+            <li>Mix in chicken and cook 10 more mins.</li>
+            <li>Serve hot with naan or rice.</li>
+          </ol>
+
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+          </div>
+
+          <div class="timer hidden">⏱ 00:00</div>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="image-container">
+          <img
+            src="https://imgs.search.brave.com/CNoTI-1L_Q09G9ZNyzi8TI7Kn3KoG5qTcNlJhggOVH4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/aW5zcGlyZWR0YXN0/ZS5uZXQvd3AtY29u/dGVudC91cGxvYWRz/LzIwMTYvMDcvUGFu/Y2FrZS1SZWNpcGUt/Mi0xMjAwLmpwZw"
+            alt="Pancakes"
+            class="recipe-image"
+          />
+          <span class="recipe-type">Breakfast</span>
+        </div>
+
+        <div class="recipe-content">
+          <h1>🥞 Pancakes</h1>
+
+          <div class="info">
+            <p>
+              <strong>Prep Time</strong>
+              20 mins
+            </p>
+            <p>
+              <strong>Servings</strong>
+              4
+            </p>
+            <p>
+              <strong>Difficulty</strong>
+              Easy
+            </p>
+          </div>
+
+          <div class="button-group">
+            <button class="toggle-ingredients">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+                />
+              </svg>
+              Ingredients
+            </button>
+            <button class="toggle-steps">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              Steps
+            </button>
+            <button class="start-cooking">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+              Start Cooking
+            </button>
+            <button class="next-step hidden" disabled>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+              Next Step
+            </button>
+          </div>
+
+          <ul class="ingredients hidden">
+            <li>1½ cups flour</li>
+            <li>1 tbsp sugar</li>
+            <li>1 tsp baking powder</li>
+            <li>1 egg</li>
+            <li>1¼ cups milk</li>
+            <li>2 tbsp butter</li>
+          </ul>
+
+          <ol class="steps hidden">
+            <li>Mix dry ingredients.</li>
+            <li>Whisk egg, milk, and melted butter.</li>
+            <li>Combine wet and dry mixtures.</li>
+            <li>Pour batter onto hot griddle.</li>
+            <li>Flip when bubbles form.</li>
+            <li>Serve with syrup or fruits.</li>
+          </ol>
+
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+          </div>
+
+          <div class="timer hidden">⏱ 00:00</div>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="image-container">
+          <img
+            src="https://imgs.search.brave.com/o0451Qw8PZUXF9_Bn-cR2gsvNNM-BeVlyazcmjsusmA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMwMS5ueXQuY29t/L2ltYWdlcy8yMDI0/LzAyLzA4L211bHRp/bWVkaWEveWEtdmFu/aWxsYS1jdXBjYWtl/cy1oYmdwL3lhLXZh/bmlsbGEtY3VwY2Fr/ZXMtaGJncC1qdW1i/by5qcGc"
+            alt="Vanilla Cupcake"
+            class="recipe-image"
+          />
+          <span class="recipe-type">Dessert</span>
+        </div>
+
+        <div class="recipe-content">
+          <h1>🧁 Vanilla Cupcakes</h1>
+
+          <div class="info">
+            <p>
+              <strong>Prep Time</strong>
+              35 mins
+            </p>
+            <p>
+              <strong>Servings</strong>
+              12
+            </p>
+            <p>
+              <strong>Difficulty</strong>
+              Medium
+            </p>
+          </div>
+
+          <div class="button-group">
+            <button class="toggle-ingredients">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+                />
+              </svg>
+              Ingredients
+            </button>
+            <button class="toggle-steps">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              Steps
+            </button>
+            <button class="start-cooking">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+              Start Cooking
+            </button>
+            <button class="next-step hidden" disabled>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+              Next Step
+            </button>
+          </div>
+
+          <ul class="ingredients hidden">
+            <li>1½ cups flour</li>
+            <li>½ cup butter</li>
+            <li>1 cup sugar</li>
+            <li>2 eggs</li>
+            <li>1 tsp vanilla extract<3/li>
+            <li>1 tsp baking powder</li>
+            <li>½ cup milk</li>
+          </ul>
+
+          <ol class="steps hidden">
+            <li>Cream butter and sugar.</li>
+            <li>Add eggs and vanilla.</li>
+            <li>Mix dry ingredients separately.</li>
+            <li>Combine all and pour into cupcake liners.</li>
+            <li>Bake at 350°F for 20 mins.</li>
+            <li>Cool and frost.</li>
+          </ol>
+
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+          </div>
+
+          <div class="timer hidden">⏱ 00:00</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        © 2025 Recipe Collection. All recipes are carefully crafted and tested.
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
