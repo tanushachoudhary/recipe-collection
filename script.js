@@ -48,66 +48,61 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Start cooking functionality for the first recipe card
-  const firstCard = document.querySelector(".recipe-card");
-  const startButton = firstCard.querySelector("#start-cooking");
-  const nextButton = firstCard.querySelector("#next-step");
-  const stepsList = firstCard.querySelector("#steps-list");
-  const steps = stepsList.querySelectorAll("li");
-  const progressBar = firstCard.querySelector("#progress-bar");
-  const timer = firstCard.querySelector("#timer");
-  let currentStep = 0;
-  let timerInterval;
-  let seconds = 0;
+  document.querySelectorAll(".recipe-card").forEach((card) => {
+    const startButton = card.querySelector(".start-cooking");
+    const nextButton = card.querySelector(".next-step");
+    const stepsList = card.querySelector(".steps");
+    const steps = stepsList.querySelectorAll("li");
+    const progressBar = card.querySelector(".progress-bar");
+    const timer = card.querySelector(".timer");
 
-  startButton.addEventListener("click", function () {
-    // Show steps and timer
-    stepsList.classList.remove("hidden");
-    stepsList.classList.add("active");
-    timer.classList.remove("hidden");
+    let currentStep = 0;
+    let timerInterval;
+    let seconds = 0;
 
-    // Hide start button, show next button
-    startButton.classList.add("hidden");
-    nextButton.classList.remove("hidden");
-    nextButton.disabled = false;
+    startButton.addEventListener("click", function () {
+      stepsList.classList.remove("hidden");
+      stepsList.classList.add("active");
+      timer.classList.remove("hidden");
 
-    // Highlight first step
-    steps[0].classList.add("highlight");
+      startButton.classList.add("hidden");
+      nextButton.classList.remove("hidden");
+      nextButton.disabled = false;
 
-    // Start timer
-    startTimer();
-  });
+      currentStep = 0;
+      steps.forEach((step) => step.classList.remove("highlight"));
+      steps[0].classList.add("highlight");
 
-  nextButton.addEventListener("click", function () {
-    // Remove highlight from current step
-    steps[currentStep].classList.remove("highlight");
-
-    // Move to next step
-    currentStep++;
-
-    // Update progress bar
-    const progress = (currentStep / steps.length) * 100;
-    progressBar.style.width = `${progress}%`;
-
-    // If there are more steps, highlight the next one
-    if (currentStep < steps.length) {
-      steps[currentStep].classList.add("highlight");
-    } else {
-      // End of recipe
-      nextButton.disabled = true;
       clearInterval(timerInterval);
-      alert("Cooking completed! Enjoy your meal.");
+      seconds = 0;
+      startTimer();
+    });
+
+    nextButton.addEventListener("click", function () {
+      steps[currentStep].classList.remove("highlight");
+      currentStep++;
+
+      const progress = (currentStep / steps.length) * 100;
+      progressBar.style.width = `${progress}%`;
+
+      if (currentStep < steps.length) {
+        steps[currentStep].classList.add("highlight");
+      } else {
+        nextButton.disabled = true;
+        clearInterval(timerInterval);
+        alert("Cooking completed! Enjoy your meal.");
+      }
+    });
+
+    function startTimer() {
+      timerInterval = setInterval(function () {
+        seconds++;
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        timer.textContent = `⏱ ${minutes
+          .toString()
+          .padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+      }, 1000);
     }
   });
-
-  function startTimer() {
-    timerInterval = setInterval(function () {
-      seconds++;
-      const minutes = Math.floor(seconds / 60);
-      const remainingSeconds = seconds % 60;
-      timer.textContent = `⏱ ${minutes
-        .toString()
-        .padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
-    }, 1000);
-  }
 });
