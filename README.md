@@ -1,4 +1,4 @@
-![Screenshot 2025-05-20 224632](https://github.com/user-attachments/assets/91df84bc-e359-42e7-a17e-b5ba3ed7f4a4)# 🍽️ Interactive Recipe Web App
+# 🍽️ Interactive Recipe Web App
 
 This is a responsive and interactive recipe web application built with HTML, CSS, and JavaScript. Users can view multiple recipes, toggle visibility for ingredients and steps, and follow a step-by-step cooking guide with a live timer and progress bar.
 
