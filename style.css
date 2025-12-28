@@ -188,15 +188,7 @@ button[disabled] {
   background: #f9f5f0;
   margin: 15px 0;
   padding: 15px 15px 15px 35px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease;
-}
-
-.ingredients.active,
-.steps.active {
-  max-height: 400px;
-  margin: 15px 0;
+  /* Transitions handled by .hidden class logic now */
 }
 
 .ingredients li,
@@ -218,38 +210,31 @@ button[disabled] {
   transform: translateX(5px);
 }
 
-/* Progress Bar */
-.progress-container {
-  background: #e0d5c7;
-  border-radius: 10px;
-  height: 8px;
-  overflow: hidden;
-  margin: 20px 0 10px;
+/* Progress Bar (Old - for card) */
+.progress-bar-container {
+  display: none; /* Hidden since we use modal now */
 }
 
-.progress-bar {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #ff7043, #f4511e);
-  transition: width 0.5s ease-in-out;
-}
-
-/* Timer */
-.timer {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #5d4037;
-}
-
+/* Utility Class to hide elements */
 .hidden {
-  display: none;
+  display: none !important;
 }
 
-.highlight {
-  background-color: rgba(255, 112, 67, 0.15) !important;
-  font-weight: bold;
+/* Smooth fade in for the lists */
+.ingredients:not(.hidden),
+.steps:not(.hidden) {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive */
@@ -258,11 +243,9 @@ button[disabled] {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
   }
-
   .recipe-content {
     padding: 20px;
   }
-
   .site-title {
     font-size: 2rem;
   }
@@ -272,22 +255,147 @@ button[disabled] {
   body {
     padding: 20px 10px;
   }
-
   .recipe-card h1 {
     font-size: 1.3rem;
   }
-
   .info {
     flex-direction: column;
     gap: 10px;
   }
 }
 
-/* Footer */
 footer {
   text-align: center;
   margin-top: 60px;
   padding: 20px;
   color: #7d6e63;
   font-size: 0.9rem;
+}
+
+/* =========================================
+   MODAL (POPUP) STYLES
+   ========================================= */
+
+/* The dark background overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The White Box inside the modal */
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal.hidden .modal-content {
+  transform: scale(0.8);
+}
+
+/* Modal Interior */
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  color: #aaa;
+  cursor: pointer;
+}
+.close-modal:hover {
+  color: #333;
+}
+
+#modal-title {
+  margin-top: 0;
+  color: #333;
+}
+
+.step-display {
+  margin: 30px 0;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.step-number {
+  color: #ff6b6b;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+#modal-step-text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* Progress Bar in Modal */
+.modal-progress-container {
+  width: 100%;
+  background-color: #eee;
+  border-radius: 10px;
+  height: 8px;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+.modal-progress-bar {
+  height: 100%;
+  background-color: #ff6b6b;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Modal Buttons */
+.modal-footer {
+  display: flex;
+  gap: 10px;
+}
+.modal-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.modal-btn.primary {
+  background-color: #ff6b6b;
+  color: white;
+}
+.modal-btn.secondary {
+  background-color: #eee;
+  color: #333;
+}
+.modal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
