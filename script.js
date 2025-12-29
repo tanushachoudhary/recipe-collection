@@ -13,18 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Ingredients Button Logic ---
     if (ingredientsBtn && ingredientsList) {
       ingredientsBtn.addEventListener("click", () => {
-        // 1. Toggle visibility
         const isNowVisible = !ingredientsList.classList.toggle("hidden");
-
-        // 2. Update Text & Icon
         if (isNowVisible) {
           ingredientsBtn.innerHTML = `
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 6L6 18M6 6l12 12"></path>
-            </svg> 
-            Hide Ingredients`;
-            
-          // Close Steps if open
+            </svg> Hide Ingredients`;
           stepsList.classList.add("hidden");
           resetStepsButton(stepsBtn);
         } else {
@@ -36,18 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Steps Button Logic ---
     if (stepsBtn && stepsList) {
       stepsBtn.addEventListener("click", () => {
-        // 1. Toggle visibility
         const isNowVisible = !stepsList.classList.toggle("hidden");
-
-        // 2. Update Text & Icon
         if (isNowVisible) {
           stepsBtn.innerHTML = `
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 6L6 18M6 6l12 12"></path>
-            </svg> 
-            Hide Steps`;
-
-          // Close Ingredients if open
+            </svg> Hide Steps`;
           ingredientsList.classList.add("hidden");
           resetIngredientsButton(ingredientsBtn);
         } else {
@@ -57,28 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- Helper Functions to Reset Button Text ---
+  // Helpers to reset buttons
   function resetIngredientsButton(btn) {
-    if(!btn) return;
-    btn.innerHTML = `
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
-      </svg>
-      Ingredients`;
+    if (!btn) return;
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg> Ingredients`;
   }
-
   function resetStepsButton(btn) {
-    if(!btn) return;
-    btn.innerHTML = `
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="8" y1="6" x2="21" y2="6"></line>
-        <line x1="8" y1="12" x2="21" y2="12"></line>
-        <line x1="8" y1="18" x2="21" y2="18"></line>
-        <line x1="3" y1="6" x2="3.01" y2="6"></line>
-        <line x1="3" y1="12" x2="3.01" y2="12"></line>
-        <line x1="3" y1="18" x2="3.01" y2="18"></line>
-      </svg>
-      Steps`;
+    if (!btn) return;
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg> Steps`;
   }
 
   /* =========================================
@@ -90,42 +64,70 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalStepNumber = document.getElementById("modal-step-number");
   const modalStepText = document.getElementById("modal-step-text");
   const modalProgressBar = document.getElementById("modal-progress-bar");
+  const modalTimerDisplay = document.getElementById("modal-timer"); // New Timer Element
   const nextBtn = document.getElementById("modal-next-btn");
   const prevBtn = document.getElementById("modal-prev-btn");
 
-  let currentSteps = []; 
-  let currentStepIndex = 0; 
+  let currentSteps = [];
+  let currentStepIndex = 0;
+  
+  // Timer Variables
+  let timerInterval;
+  let totalSeconds = 0;
 
   // --- Open Modal ---
   document.querySelectorAll(".start-cooking").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const card = e.target.closest(".recipe-card");
-
-      // Get Data
       const title = card.querySelector("h1").innerText;
       const stepElements = card.querySelectorAll(".steps li");
-      
+
       modalTitle.innerText = title;
       currentSteps = Array.from(stepElements).map((li) => li.innerText);
 
-      // Reset & Show
       currentStepIndex = 0;
       updateModalUI();
+      startTimer(); // Start the timer!
       modal.classList.remove("hidden");
     });
   });
+
+  // --- Timer Logic ---
+  function startTimer() {
+    clearInterval(timerInterval); // Clear any existing timer
+    totalSeconds = 0;
+    updateTimerDisplay();
+    
+    timerInterval = setInterval(() => {
+      totalSeconds++;
+      updateTimerDisplay();
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(timerInterval);
+  }
+
+  function updateTimerDisplay() {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    // Format to 00:00
+    modalTimerDisplay.innerText = `⏱ ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
 
   // --- Update Modal Content ---
   function updateModalUI() {
     // Finished State
     if (currentStepIndex >= currentSteps.length) {
       modalStepNumber.innerText = "All Done!";
-      modalStepText.innerText = "Enjoy your meal! 🍽️";
+      modalStepText.innerText = `You finished in ${modalTimerDisplay.innerText.replace("⏱ ", "")}! Enjoy your meal! 🍽️`;
       modalProgressBar.style.width = "100%";
-      
+
       prevBtn.disabled = false;
       nextBtn.innerText = "Finish";
       nextBtn.onclick = closeModal;
+      
+      stopTimer(); // Stop timer when finished
       return;
     }
 
@@ -133,11 +135,11 @@ document.addEventListener("DOMContentLoaded", () => {
     modalStepNumber.innerText = `Step ${currentStepIndex + 1} of ${currentSteps.length}`;
     modalStepText.innerText = currentSteps[currentStepIndex];
 
-    const progress = ((currentStepIndex) / currentSteps.length) * 100;
+    const progress = (currentStepIndex / currentSteps.length) * 100;
     modalProgressBar.style.width = `${progress}%`;
 
     nextBtn.innerText = "Next Step";
-    nextBtn.onclick = nextStep; 
+    nextBtn.onclick = nextStep;
     prevBtn.disabled = currentStepIndex === 0;
   }
 
@@ -157,6 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (nextBtn.innerText === "Finish") {
         currentStepIndex = currentSteps.length - 1;
         updateModalUI();
+        startTimer(); // Restart timer if they go back from finish screen? Or keep it stopped.
+        // Let's keep it stopped to avoid confusion, or you can remove this line.
       }
     });
   }
@@ -166,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("hidden");
     currentSteps = [];
     currentStepIndex = 0;
+    stopTimer(); // Stop timer when closing
   }
 
   if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);

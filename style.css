@@ -399,3 +399,17 @@ footer {
   opacity: 0.5;
   cursor: not-allowed;
 }
+/* Timer inside the Modal */
+.modal-timer {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #d84315; /* Dark Orange */
+  background-color: #fbe9e7; /* Light Orange background */
+  padding: 8px 20px;
+  border-radius: 25px;
+  display: inline-block;
+  margin: 10px 0 20px 0;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-feature-settings: "tnum"; /* Prevents numbers from jittering */
+  font-variant-numeric: tabular-nums;
+}
